@@ -1,0 +1,81 @@
+{
+	"name": "@cfware/ava-selenium-manager",
+	"version": "0.1.0",
+	"description": "Selenium Manager for AVA",
+	"main": "index.js",
+	"scripts": {
+		"test": "xo && nyc ava -v"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"author": "Corey Farrell",
+	"license": "MIT",
+	"files": [
+		"*.js",
+		"!test-artifact-dir.js"
+	],
+	"keywords": [
+		"selenium",
+		"ava"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cfware/ava-selenium-manager.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cfware/ava-selenium-manager/issues"
+	},
+	"homepage": "https://github.com/cfware/ava-selenium-manager#readme",
+	"dependencies": {
+		"ava": "^1.2.1",
+		"istanbul-lib-coverage": "^2.0.3",
+		"make-dir": "^2.0.0",
+		"pify": "^4.0.1",
+		"selenium-webdriver": "^4.0.0-alpha.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.3.3",
+		"@cfware/eslint-config-browser": "^0.1.2",
+		"babel-plugin-istanbul": "^5.1.0",
+		"chromedriver": "^2.46.0",
+		"fastify": "^1.14.1",
+		"fastify-babel": "^1.1.0",
+		"fastify-static": "^1.1.0",
+		"geckodriver": "~1.14.1",
+		"hasha": "^3.0.0",
+		"nyc": "^13.3.0",
+		"xo": "^0.24.0"
+	},
+	"nyc": {
+		"check-coverage": true,
+		"per-file": true,
+		"lines": 100,
+		"statements": 100,
+		"functions": 100,
+		"branches": 100,
+		"all": true,
+		"reporter": [
+			"html",
+			"text"
+		],
+		"exclude": [
+			"coverage/*.js",
+			"doit.js",
+			"__tests__/*.js",
+			"test-*.js",
+			"test/*.js",
+			"test/helpers/*.js"
+		]
+	},
+	"xo": {
+		"overrides": [
+			{
+				"files": [
+					"test/fixtures/**"
+				],
+				"extends": "@cfware/eslint-config-browser"
+			}
+		]
+	}
+}

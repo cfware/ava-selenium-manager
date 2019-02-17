@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script src="check-image.js"></script>
+		<style>
+			/* Firefox image retreival is somewhat broken due to:
+			 *   https://github.com/mozilla/geckodriver/issues/931
+			 *
+			 * `width: -moz-fit-content` ensures the same size
+			 * screenshot regardless of client settings.
+			 */
+			html, body {
+				display: inline-block!important;
+				margin: 0;
+				width: -moz-fit-content;
+			}
+		</style>
+	</head>
+	<body>
+		<this-test id="test"></this-test>
+	</body>
+</html>

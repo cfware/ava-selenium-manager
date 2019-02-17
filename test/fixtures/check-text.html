@@ -1,0 +1,15 @@
+<html>
+	<head>
+		<script>
+			customElements.define('this-test', class extends HTMLElement {
+				constructor() {
+					super();
+					this.attachShadow({mode: 'open'}).innerHTML = '<div>This is a test!</div>';
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<this-test id="test"></this-test>
+	</body>
+</html>
