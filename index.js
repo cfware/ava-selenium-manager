@@ -8,6 +8,7 @@ const test = require('ava');
 const {createCoverageMap} = require('istanbul-lib-coverage');
 const pify = require('pify');
 const makeDir = require('make-dir');
+const {PNG} = require('pngjs');
 
 const imageFile = require('./image-file');
 const builderFirefox = require('./builder-firefox');
@@ -33,6 +34,10 @@ function skipPages() {
 	});
 }
 
+function normalizePNG(image64) {
+	return PNG.sync.write(PNG.sync.read(Buffer.from(image64, 'base64')));
+}
+
 function initPages(daemonFactory, daemonStop, daemonGetURL) {
 	let serializer = Promise.resolve();
 	pages.forEach(({pathname, impl}) => {
@@ -42,29 +47,28 @@ function initPages(daemonFactory, daemonStop, daemonGetURL) {
 			Object.assign(t.context, {
 				selenium,
 				async snapshotImage(element, message) {
-					const promise = element.takeScreenshot().catch(
-						/* istanbul ignore next */
-						() => 'Element screenshot not supported by this browser.'
-					);
-					const image64 = await promise;
+					try {
+						const image64 = normalizePNG(await element.takeScreenshot()).toString('base64');
 
-					t.snapshot(`![](data:image/png;base64,${image64})`, message);
+						t.snapshot(`![](data:image/png;base64,${image64})`, message);
+					} catch (error) {
+						/* istanbul ignore next */
+						t.log('Could not retrieve screenshot of element.');
+					}
 				},
 				async grabImage(element, imageID) {
 					const imageFileName = imageFile(t, imageID);
 					try {
-						const image64 = await element.takeScreenshot();
-						/* istanbul ignore next */
-						if (!image64) {
-							throw new Error('No image found');
-						}
+						const image64 = normalizePNG(await element.takeScreenshot());
 
 						await makeDir(path.dirname(imageFileName));
-						await fs.writeFile(imageFileName, Buffer.from(image64, 'base64'));
+						await fs.writeFile(imageFileName, image64);
 					} catch (error) {
 						/* If the browser doesn't support capture */
 						/* istanbul ignore next */
 						await fs.unlink(imageFileName).catch(() => {});
+						/* istanbul ignore next */
+						t.log('Could not retrieve screenshot of element.');
 					}
 				},
 				async checkText(ele, text) {
