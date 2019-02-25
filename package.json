@@ -31,7 +31,6 @@
 		"ava": "^1.2.1",
 		"istanbul-lib-coverage": "^2.0.3",
 		"make-dir": "^2.0.0",
-		"pify": "^4.0.1",
 		"pngjs": "^3.3.3",
 		"selenium-webdriver": "^4.0.0-alpha.1"
 	},

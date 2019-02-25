@@ -2,19 +2,17 @@
 /* eslint ava/no-ignored-test-files: ["off"] */
 /* global window */
 const path = require('path');
-const _fs = require('fs');
+const fs = require('fs');
+const {promisify} = require('util');
 
 const test = require('ava');
 const {createCoverageMap} = require('istanbul-lib-coverage');
-const pify = require('pify');
 const makeDir = require('make-dir');
 const {PNG} = require('pngjs');
 
 const imageFile = require('./image-file');
 const builderFirefox = require('./builder-firefox');
 const builderChrome = require('./builder-chrome');
-
-const fs = pify(_fs);
 
 /* istanbul ignore next */
 const getBrowserCoverage = () => window.__coverage__;
@@ -62,11 +60,11 @@ function initPages(daemonFactory, daemonStop, daemonGetURL) {
 						const image64 = normalizePNG(await element.takeScreenshot());
 
 						await makeDir(path.dirname(imageFileName));
-						await fs.writeFile(imageFileName, image64);
+						await promisify(fs.writeFile)(imageFileName, image64);
 					} catch (error) {
 						/* If the browser doesn't support capture */
 						/* istanbul ignore next */
-						await fs.unlink(imageFileName).catch(() => {});
+						await promisify(fs.unlink)(imageFileName).catch(() => {});
 						/* istanbul ignore next */
 						t.log('Could not retrieve screenshot of element.');
 					}
