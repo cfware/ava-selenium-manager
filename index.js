@@ -36,7 +36,7 @@ function normalizePNG(image64) {
 	return PNG.sync.write(PNG.sync.read(Buffer.from(image64, 'base64')));
 }
 
-function initPages(daemonFactory, daemonStop, daemonGetURL) {
+function initPages(inst) {
 	let serializer = Promise.resolve();
 	pages.forEach(({pathname, impl}) => {
 		async function runTest(t) {
@@ -74,8 +74,8 @@ function initPages(daemonFactory, daemonStop, daemonGetURL) {
 				}
 			});
 
-			const daemon = await daemonFactory(t);
-			await selenium.get(daemonGetURL(t, daemon, pathname));
+			const daemon = await inst.daemonFactory(t);
+			await selenium.get(inst.daemonGetURL(t, daemon, pathname));
 			await impl(t);
 
 			const coverage = await selenium.executeScript(getBrowserCoverage);
@@ -84,7 +84,7 @@ function initPages(daemonFactory, daemonStop, daemonGetURL) {
 				coverageMap.merge(coverage);
 			}
 
-			daemonStop(daemon);
+			inst.daemonStop(daemon);
 		}
 
 		test(pathname, async t => {
@@ -104,9 +104,9 @@ function initPages(daemonFactory, daemonStop, daemonGetURL) {
 	});
 }
 
-function setup({browserBuilder, daemonFactory, daemonStop, daemonGetURL}) {
-	if (typeof browserBuilder !== 'function' || typeof daemonFactory !== 'function' || typeof daemonGetURL !== 'function') {
-		throw new TypeError('Invalid arguments');
+function setup(inst) {
+	if (typeof inst.browserBuilder !== 'function' || typeof inst.daemonFactory !== 'function' || typeof inst.daemonGetURL !== 'function') {
+		throw new TypeError('Invalid instance');
 	}
 
 	if (selenium) {
@@ -118,7 +118,7 @@ function setup({browserBuilder, daemonFactory, daemonStop, daemonGetURL}) {
 	}
 
 	try {
-		selenium = browserBuilder().build();
+		selenium = inst.browserBuilder().build();
 		if (!selenium) {
 			throw new Error('Missing selenium');
 		}
@@ -126,7 +126,7 @@ function setup({browserBuilder, daemonFactory, daemonStop, daemonGetURL}) {
 		/* Verify the browser can start */
 		selenium.get('data:text/plain,')
 			.then(() => { // eslint-disable-line promise/prefer-await-to-then
-				initPages(daemonFactory, daemonStop, daemonGetURL);
+				initPages(inst);
 			})
 			.catch(skipPages);
 	} catch (error) {

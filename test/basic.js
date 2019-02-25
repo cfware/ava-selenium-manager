@@ -14,8 +14,8 @@ test('setup errors', t => {
 	const daemonFactory = () => {};
 	const daemonGetURL = () => {};
 
-	t.throws(() => seleniumManager.setup({browserBuilder, daemonFactory}), 'Invalid arguments');
-	t.throws(() => seleniumManager.setup({browserBuilder, daemonGetURL}), 'Invalid arguments');
-	t.throws(() => seleniumManager.setup({daemonFactory, daemonGetURL}), 'Invalid arguments');
+	t.throws(() => seleniumManager.setup({browserBuilder, daemonFactory}), 'Invalid instance');
+	t.throws(() => seleniumManager.setup({browserBuilder, daemonGetURL}), 'Invalid instance');
+	t.throws(() => seleniumManager.setup({daemonFactory, daemonGetURL}), 'Invalid instance');
 	t.throws(() => seleniumManager.setup({browserBuilder, daemonFactory, daemonGetURL}), 'No pages declared');
 });
