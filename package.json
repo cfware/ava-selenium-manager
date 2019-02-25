@@ -1,6 +1,6 @@
 {
 	"name": "@cfware/ava-selenium-manager",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Selenium Manager for AVA",
 	"main": "index.js",
 	"scripts": {
