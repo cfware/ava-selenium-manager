@@ -4,6 +4,7 @@
 	"description": "Selenium Manager for AVA",
 	"main": "index.js",
 	"scripts": {
+		"release": "standard-version",
 		"test": "xo && nyc ava -v"
 	},
 	"engines": {
@@ -45,7 +46,11 @@
 		"geckodriver": "^1.15.1",
 		"hasha": "^3.0.0",
 		"nyc": "^13.3.0",
+		"standard-version": "^5.0.0",
 		"xo": "^0.24.0"
+	},
+	"standard-version": {
+		"sign": true
 	},
 	"nyc": {
 		"check-coverage": true,
