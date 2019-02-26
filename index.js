@@ -37,11 +37,8 @@ function normalizePNG(image64) {
 }
 
 function initPages(inst) {
-	let serializer = Promise.resolve();
 	pages.forEach(({pathname, impl}) => {
-		async function runTest(t) {
-			await serializer;
-
+		test.serial(pathname, async t => {
 			Object.assign(t.context, {
 				selenium,
 				async snapshotImage(element, message) {
@@ -85,10 +82,6 @@ function initPages(inst) {
 			}
 
 			inst.daemonStop(daemon);
-		}
-
-		test(pathname, async t => {
-			await (serializer = runTest(t));
 		});
 	});
 
