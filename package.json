@@ -4,7 +4,7 @@
 	"description": "Selenium Manager for AVA",
 	"main": "index.js",
 	"scripts": {
-		"release": "standard-version",
+		"release": "standard-version --sign",
 		"test": "xo && nyc ava -v"
 	},
 	"engines": {
@@ -48,9 +48,6 @@
 		"nyc": "^13.3.0",
 		"standard-version": "^5.0.0",
 		"xo": "^0.24.0"
-	},
-	"standard-version": {
-		"sign": true
 	},
 	"nyc": {
 		"check-coverage": true,
