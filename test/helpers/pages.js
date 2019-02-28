@@ -61,7 +61,7 @@ export function setupTesting(browserBuilder) {
 		daemonStop(daemon) {
 			daemon.server.unref();
 		},
-		daemonGetURL(t, daemon, pathname) {
+		daemonGetURL(daemon, pathname) {
 			return `http://localhost:${daemon.server.address().port}/test/${pathname}`;
 		}
 	});

@@ -71,8 +71,8 @@ function initPages(inst) {
 				}
 			});
 
-			const daemon = await inst.daemonFactory(t);
-			await selenium.get(inst.daemonGetURL(t, daemon, pathname));
+			const daemon = await inst.daemonFactory();
+			await selenium.get(inst.daemonGetURL(daemon, pathname));
 			await impl(t);
 
 			const coverage = await selenium.executeScript(getBrowserCoverage);
