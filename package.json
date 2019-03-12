@@ -44,7 +44,7 @@
 		"fastify-babel": "^1.1.0",
 		"fastify-static": "^2.3.4",
 		"geckodriver": "^1.15.1",
-		"hasha": "^3.0.0",
+		"hasha": "^4.0.0",
 		"nyc": "^13.3.0",
 		"standard-version": "^5.0.1",
 		"xo": "^0.24.0"
