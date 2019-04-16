@@ -39,7 +39,7 @@
 		"@babel/core": "^7.3.4",
 		"@cfware/eslint-config-browser": "^0.2.0",
 		"babel-plugin-istanbul": "^5.1.1",
-		"chromedriver": "^2.46.0",
+		"chromedriver": "^73.0.0",
 		"fastify": "^2.0.0",
 		"fastify-babel": "^1.1.0",
 		"fastify-static": "^2.3.4",
