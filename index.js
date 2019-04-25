@@ -1,5 +1,6 @@
 'use strict';
 /* eslint ava/no-ignored-test-files: ["off"] */
+/* eslint promise/prefer-await-to-then: ["off"] */
 /* global window */
 const path = require('path');
 const fs = require('fs');
@@ -30,6 +31,12 @@ function skipPages() {
 			() => {}
 		);
 	});
+}
+
+async function seleniumBuilt(inst) {
+	/* Verify the browser can start */
+	await selenium.get('data:text/plain,');
+	initPages(inst);
 }
 
 function normalizePNG(image64) {
@@ -110,22 +117,14 @@ function setup(inst) {
 		throw new Error('No pages declared');
 	}
 
-	try {
-		selenium = inst.browserBuilder().build();
-		if (!selenium) {
-			throw new Error('Missing selenium');
-		}
-
-		/* Verify the browser can start */
-		selenium.get('data:text/plain,')
-			.then(() => { // eslint-disable-line promise/prefer-await-to-then
-				initPages(inst);
-			})
-			.catch(skipPages);
-	} catch (error) {
-		/* Failed to build the browser. */
+	selenium = inst.browserBuilder().build();
+	if (!selenium || !selenium.then) {
 		skipPages();
+
+		return;
 	}
+
+	selenium.then(() => seleniumBuilt(inst)).catch(skipPages);
 }
 
 function page(pathname, impl) {
