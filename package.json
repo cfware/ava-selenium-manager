@@ -37,7 +37,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
-		"@cfware/eslint-config-browser": "^0.2.1",
+		"@cfware/eslint-config-browser": "^0.3.0",
 		"babel-plugin-istanbul": "^5.1.4",
 		"chromedriver": "^74.0.0",
 		"fastify": "^2.3.0",
