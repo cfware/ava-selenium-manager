@@ -29,7 +29,7 @@
 	},
 	"homepage": "https://github.com/cfware/ava-selenium-manager#readme",
 	"dependencies": {
-		"ava": "^1.4.1",
+		"ava": "^2.0.0",
 		"istanbul-lib-coverage": "^2.0.5",
 		"make-dir": "^3.0.0",
 		"pngjs": "^3.4.0",
