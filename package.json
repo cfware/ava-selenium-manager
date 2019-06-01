@@ -29,7 +29,7 @@
 	},
 	"homepage": "https://github.com/cfware/ava-selenium-manager#readme",
 	"dependencies": {
-		"ava": "^1.4.1",
+		"ava": "^2.0.0",
 		"istanbul-lib-coverage": "^2.0.5",
 		"make-dir": "^3.0.0",
 		"pngjs": "^3.4.0",
@@ -38,6 +38,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@cfware/eslint-config-browser": "^0.3.0",
+		"@cfware/nyc": "^0.4.3",
 		"babel-plugin-istanbul": "^5.1.4",
 		"chromedriver": "^74.0.0",
 		"fastify": "^2.3.0",
@@ -49,32 +50,11 @@
 		"standard-version": "^6.0.1",
 		"xo": "^0.24.0"
 	},
-	"nyc": {
-		"check-coverage": true,
-		"per-file": true,
-		"lines": 100,
-		"statements": 100,
-		"functions": 100,
-		"branches": 100,
-		"all": true,
-		"reporter": [
-			"html",
-			"text"
-		],
-		"exclude": [
-			"coverage/*.js",
-			"doit.js",
-			"__tests__/*.js",
-			"test-*.js",
-			"test/*.js",
-			"test/helpers/*.js"
-		]
-	},
 	"xo": {
 		"overrides": [
 			{
 				"files": [
-					"test/fixtures/**"
+					"fixtures/**"
 				],
 				"extends": "@cfware/eslint-config-browser"
 			}

@@ -5,10 +5,10 @@ import fastifyStatic from 'fastify-static';
 import fastifyBabel from 'fastify-babel';
 import hasha from 'hasha';
 
-import {setup, page} from '../..';
-import imageFile from '../../image-file';
+import {setup, page} from '..';
+import imageFile from '../image-file';
 
-const rootDir = path.resolve(__dirname, '..', '..');
+const rootDir = path.resolve(__dirname, '..');
 
 page('check-text.html', async t => {
 	const {selenium, checkText} = t.context;
@@ -42,7 +42,7 @@ export function setupTesting(browserBuilder) {
 		async daemonFactory() {
 			const daemon = fastify()
 				.register(fastifyStatic, {
-					root: path.resolve(rootDir, 'test', 'fixtures'),
+					root: path.resolve(rootDir, 'fixtures'),
 					prefix: '/test'
 				})
 				.register(fastifyBabel, {
