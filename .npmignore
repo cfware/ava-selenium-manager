@@ -1,0 +1,10 @@
+*.tgz
+node_modules
+coverage
+.nyc_output
+package
+.travis.yml
+nyc.config.js
+fixtures
+test*
+__tests__
