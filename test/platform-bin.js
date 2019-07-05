@@ -1,5 +1,5 @@
 import test from 'ava';
-import platformBin from '../platform-bin';
+import platformBin from '../platform-bin.js';
 
 function platformTest(t, testPlatform) {
 	const {platform} = process;

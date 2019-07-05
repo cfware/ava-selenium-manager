@@ -1,5 +1,5 @@
 import test from 'ava';
-import seleniumManager from '..';
+import seleniumManager from '../index.js';
 
 test('proper exports', t => {
 	const fns = ['setup', 'page', 'builderChrome', 'builderFirefox'];

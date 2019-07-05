@@ -1,4 +1,4 @@
-import {setupTesting} from './_pages';
+import {setupTesting} from './_pages.js';
 
 setupTesting(() => {
 	return {

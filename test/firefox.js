@@ -1,4 +1,4 @@
-import {builderFirefox} from '..';
-import {setupTesting} from './_pages';
+import {builderFirefox} from '../index.js';
+import {setupTesting} from './_pages.js';
 
 setupTesting(builderFirefox);

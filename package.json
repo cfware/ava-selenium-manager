@@ -33,6 +33,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@cfware/eslint-config-browser": "^0.3.0",
+		"@cfware/eslint-config-node": "^0.1.0",
 		"@cfware/nyc": "^0.5.0",
 		"babel-plugin-istanbul": "^5.1.4",
 		"chromedriver": "^75.0.0",
@@ -46,12 +47,16 @@
 		"xo": "^0.24.0"
 	},
 	"xo": {
+		"extends": "@cfware/eslint-config-node",
 		"overrides": [
 			{
 				"files": [
 					"fixtures/**"
 				],
-				"extends": "@cfware/eslint-config-browser"
+				"extends": [
+					"@cfware/eslint-config-node",
+					"@cfware/eslint-config-browser"
+				]
 			}
 		]
 	}

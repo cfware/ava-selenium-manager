@@ -1,4 +1,4 @@
-import {builderChrome} from '..';
-import {setupTesting} from './_pages';
+import {builderChrome} from '../index.js';
+import {setupTesting} from './_pages.js';
 
 setupTesting(builderChrome);

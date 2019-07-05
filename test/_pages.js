@@ -5,8 +5,8 @@ import fastifyStatic from 'fastify-static';
 import fastifyBabel from 'fastify-babel';
 import hasha from 'hasha';
 
-import {setup, page} from '..';
-import imageFile from '../image-file';
+import {setup, page} from '../index.js';
+import imageFile from '../image-file.js';
 
 const rootDir = path.resolve(__dirname, '..');
 
