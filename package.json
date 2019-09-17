@@ -36,7 +36,7 @@
 		"@cfware/eslint-config-node": "^0.1.0",
 		"@cfware/nyc": "^0.5.0",
 		"babel-plugin-istanbul": "^5.1.4",
-		"chromedriver": "^76.0.0",
+		"chromedriver": "^77.0.0",
 		"fastify": "^2.6.0",
 		"fastify-babel": "^1.2.1",
 		"fastify-static": "^2.5.0",
