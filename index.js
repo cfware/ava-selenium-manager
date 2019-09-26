@@ -53,7 +53,7 @@ function initPages(inst) {
 						const image64 = normalizePNG(await element.takeScreenshot()).toString('base64');
 
 						t.snapshot(`![](data:image/png;base64,${image64})`, message);
-					} catch (error) {
+					} catch (_) {
 						/* istanbul ignore next */
 						t.log('Could not retrieve screenshot of element.');
 					}
@@ -65,7 +65,7 @@ function initPages(inst) {
 
 						await makeDir(path.dirname(imageFileName));
 						await promisify(fs.writeFile)(imageFileName, image64);
-					} catch (error) {
+					} catch (_) {
 						/* If the browser doesn't support capture */
 						/* istanbul ignore next */
 						await promisify(fs.unlink)(imageFileName).catch(() => {});
