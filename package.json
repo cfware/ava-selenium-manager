@@ -25,7 +25,7 @@
 	"homepage": "https://github.com/cfware/ava-selenium-manager#readme",
 	"dependencies": {
 		"ava": "^2.2.0",
-		"istanbul-lib-coverage": "^2.0.5",
+		"istanbul-lib-coverage": "^3.0.0",
 		"make-dir": "^3.0.0",
 		"pngjs": "^3.4.0",
 		"selenium-webdriver": "^4.0.0-alpha.4"
