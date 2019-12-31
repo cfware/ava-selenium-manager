@@ -1,14 +1,12 @@
 'use strict';
-/* eslint ava/no-ignored-test-files: ["off"] */
-/* eslint promise/prefer-await-to-then: ["off"] */
+/* eslint ava/no-ignored-test-files: 0 */
+/* eslint promise/prefer-await-to-then: 0 */
 /* global window */
 const path = require('path');
-const fs = require('fs');
-const {promisify} = require('util');
+const {promises: fs} = require('fs');
 
 const test = require('ava');
 const {createCoverageMap} = require('istanbul-lib-coverage');
-const makeDir = require('make-dir');
 const {PNG} = require('pngjs');
 
 const imageFile = require('./image-file');
@@ -25,12 +23,12 @@ const pages = [];
 let selenium = null;
 
 function skipPages() {
-	pages.forEach(({pathname}) => {
+	for (const {pathname} of pages) {
 		test.skip(pathname, // eslint-disable-line ava/no-skip-test
 			/* istanbul ignore next */
 			() => {}
 		);
-	});
+	}
 }
 
 async function seleniumBuilt(inst) {
@@ -44,7 +42,7 @@ function normalizePNG(image64) {
 }
 
 function initPages(inst) {
-	pages.forEach(({pathname, impl}) => {
+	for (const {pathname, impl} of pages) {
 		test.serial(pathname, async t => {
 			Object.assign(t.context, {
 				selenium,
@@ -63,12 +61,12 @@ function initPages(inst) {
 					try {
 						const image64 = normalizePNG(await element.takeScreenshot());
 
-						await makeDir(path.dirname(imageFileName));
-						await promisify(fs.writeFile)(imageFileName, image64);
+						await fs.mkdir(path.dirname(imageFileName), {recursive: true});
+						await fs.writeFile(imageFileName, image64);
 					} catch (_) {
 						/* If the browser doesn't support capture */
 						/* istanbul ignore next */
-						await promisify(fs.unlink)(imageFileName).catch(() => {});
+						await fs.unlink(imageFileName).catch(() => {});
 						/* istanbul ignore next */
 						t.log('Could not retrieve screenshot of element.');
 					}
@@ -90,7 +88,7 @@ function initPages(inst) {
 
 			inst.daemonStop(daemon);
 		});
-	});
+	}
 
 	test.after.always(async () => {
 		await selenium.quit();

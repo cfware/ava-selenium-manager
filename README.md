@@ -10,7 +10,7 @@ Selenium Manager for AVA.
 
 ### Install @cfware/ava-selenium-manager
 
-This module requires node.js 8 or above.
+This module requires node.js 12 or above.
 
 ```sh
 npm i -D ava @cfware/ava-selenium-manager
